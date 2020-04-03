@@ -1,6 +1,6 @@
+#**************Algorithm Programs**************
 
 class util:
-
     #Function for anagram or not
     @staticmethod
     def anagram(string1,string2):
@@ -45,6 +45,7 @@ class util:
                 return util.binarySearch(array, mid + 1, high, num)
         else:
             return -1
+
     #Function for insertion sort
     @staticmethod
     def insertionSort(array):
@@ -107,13 +108,56 @@ class util:
         d0 = (d + x + (31 * m0) // 12) % 7
         print(f"Day of the week is {days[d0]}")
 
+    #Function of temperature conversion
+    @staticmethod
+    def conversion_of_temperature(choice, temp):
+        if choice == 1:
+            celcius_to_fehrenheit = round((temp * 9 / 5) + 32, 4)
+            print(f"Temperature {temp}C ={celcius_to_fehrenheit}F ")
+        elif choice == 2:
+            fahrenheit_to_celcius = round((temp - 32) * 5 / 9, 4)
+            print(f"Temperature {temp}F ={fahrenheit_to_celcius}C")
 
-# Main Function
+    #function for vending machine
+    @staticmethod
+    def vending_machine(avilable_notes,changing_amount):
+        i=0
+        total_notes=0
+        while changing_amount>0:
+            notes=changing_amount//avilable_notes[i]
+            if(notes>0):
+                print(f"{notes} notes of {avilable_notes[i]} rupess")
+                changing_amount=changing_amount%avilable_notes[i]
+                total_notes+=notes
+            i+=1
+        return total_notes
+    #Function for decimal to binary:
+    @staticmethod
+    def DecimalToBinary(num):
+        if num >= 1:
+            util.DecimalToBinary(num // 2)
+        print(num % 2, end=' ')
+
+    #Function for swap nibbles:
+    @staticmethod
+    def swapNibbles(x):
+        return ((x & 0x0F) << 4 | (x & 0xF0) >> 4)
+
+    #Function for monthly payment:P=amount, Y=year, R=rate
+    @staticmethod
+    def monthlyPayment(P, Y, R):
+        n = 12 * Y
+        r = R / (12 * 100)
+        payment = P * r / (1 - (1 + r) ** (-n))
+        print(f"Monthly payment you would have to make is = {payment}")
+
+#Main Function
 def main():
     choiceNo=int(input("Enter the choice number:  \n 1. Check the Anagram: \n 2. Prime number in range: \n 3. Binary search of integer: \n" 
                        " 4. Binary search of string: \n 5. Insertion sort for integer: \n 6. Insertion sort for string: \n "
                        "7. Bubble sort for integer: \n 8. Bubble sort for string: \n 9. Merge sort for string: \n" 
-                       "10. Day of Week: \n"))
+                       "10. Day of Week: \n11. Temperature conversion: \n12. Vending machine: \n13. Decimal to Binary conversion: \n"
+                       "14. Swap Nibbles: \n15. Monthly payment: \n"))
 
     #anagram function calling
     if choiceNo==1:
@@ -209,6 +253,40 @@ def main():
         days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         util.day_of_week(date, month, year, days)
 
+    #Temperature conversion
+    elif choiceNo==11:
+        print("1. Celsius to Fahrenheit conversion: ")
+        print("2. Fahrenheit to Celsius conversion: ")
+        choice = int(input("Enter your choice:"))
+        temp = int(input("Enter the temperature:"))
+        if choice == 1:
+            util.conversion_of_temperature(choice, temp)
+        elif choice == 2:
+            util.conversion_of_temperature(choice, temp)
+        else:
+            print("Invalid choice !")
+
+    #vending machine
+    elif choiceNo==12:
+        changing_amount = int(input("Enter the amount returned by Vending machine :"))
+        avilable_notes = [1000, 500, 100, 50, 10, 5, 2, 1]
+        print(f"Total number of notes ={util.vending_machine(avilable_notes, changing_amount)}")
+
+    #decimal number to binary number conversion
+    elif choiceNo==13:
+        num = int(input("Enter a number :"))
+        util.DecimalToBinary(num)
+
+    #Swap nibbles
+    elif choiceNo==14:
+        num = int(input("Enter a number :"))
+        print(util.swapNibbles(num))
+    #Monthly payment
+    elif choiceNo==15:
+        principal_amount = int(input("Enter the principal amount :"))
+        year = int(input("Enter how many year you take to repay :"))
+        rate = int(input("Enter the rate of interest :"))
+        util.monthlyPayment(principal_amount, year, rate)
 
     else:
         print("Invalid choice !! ")
