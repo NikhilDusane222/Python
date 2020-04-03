@@ -32,7 +32,7 @@ class util:
             array.append(int(input()))
         return array
 
-    #function for binary search
+    #Function for binary search
     @staticmethod
     def binarySearch(array, low, high, num):
         if high >= low:
@@ -57,7 +57,7 @@ class util:
             array[j + 1] = temp
         return array
 
-    #function for bubble sort
+    #Function for bubble sort
     @staticmethod
     def bubbleSort(array):
         for i in range (len(array)):
@@ -68,13 +68,52 @@ class util:
                     array[j]=temp
         return array
 
+    #Function for merge sort
+    @staticmethod
+    def mergeSort(array):
+        k=0
+        if len(array)>1:
+            mid=int(len(array)/2)
+            left=array[:mid]
+            right=array[mid:]
+            #continuously break list until have 2 elements
+            util.mergeSort(left)
+            util.mergeSort(right)
+            i=j=0
+            while (i<len(left)) and (j<len(right)):
+                if left[i]<right[j]:
+                    array[k]=left[i]
+                    i+=1
+                    k+=1
+                else:
+                    array[k]=right[j]
+                    j+=1
+                    k+=1
+            while i<len(left):
+                array[k]=left[i]
+                i+=1
+                k+=1
+            while j<len(right):
+                array[k]=right[j]
+                j+=1
+                k+=1
+                return array
+    #Function for day of week
+    @staticmethod
+    def day_of_week(d, m, y, days):
+        y0 = y - (14 - m) // 12
+        x = y0 + (y0 // 4) - y0 // 100 + y0 // 400
+        m0 = m + 12 * ((14 - m) // 12) - 2
+        d0 = (d + x + (31 * m0) // 12) % 7
+        print(f"Day of the week is {days[d0]}")
 
 
-#main function
+# Main Function
 def main():
     choiceNo=int(input("Enter the choice number:  \n 1. Check the Anagram: \n 2. Prime number in range: \n 3. Binary search of integer: \n" 
                        " 4. Binary search of string: \n 5. Insertion sort for integer: \n 6. Insertion sort for string: \n "
-                       "7. Bubble sort for integer: \n 8. Bubble sort for string \n "))
+                       "7. Bubble sort for integer: \n 8. Bubble sort for string: \n 9. Merge sort for string: \n" 
+                       "10. Day of Week: \n"))
 
     #anagram function calling
     if choiceNo==1:
@@ -151,6 +190,24 @@ def main():
             array.append(input())
         array = util.bubbleSort(array)
         print("The sorted list is : ", array)
+
+    #sort the string using merge sort
+    elif choiceNo==9:
+        array=[]
+        number=int(input("Enter how many elements you want to add : "))
+        print("Enter elements : ")
+        for i in range(number):
+            array.append(input())
+        array=util.mergeSort(array)
+        print("The sorted array is: ",array)
+
+    #Week of day
+    elif choiceNo==10:
+        date = int(input("Enter the date:"))
+        month = int(input("Enter the month in form of 1-12 :"))
+        year = int(input("Enter the year :"))
+        days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        util.day_of_week(date, month, year, days)
 
 
     else:
