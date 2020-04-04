@@ -304,6 +304,7 @@ def main():
         c=int(input("Enter number : "))
         util.squareRoot(c)
 
+    #Else condition
     else:
         print("Invalid choice !! ")
 main()
