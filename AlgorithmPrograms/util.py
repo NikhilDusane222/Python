@@ -1,6 +1,7 @@
 #**************Algorithm Programs**************
 
 class util:
+
     #Function for anagram or not
     @staticmethod
     def anagram(string1,string2):
@@ -151,13 +152,22 @@ class util:
         payment = P * r / (1 - (1 + r) ** (-n))
         print(f"Monthly payment you would have to make is = {payment}")
 
+    #Function for square root of a nonnegative number c using Newton's method
+    @staticmethod
+    def squareRoot(c):
+        epsilon=float(1e-15)
+        t=c
+        while abs(t-c/t)>epsilon*t:
+            t=float((c/t +t)/2)
+        print("Square root of number",c," is :",t )
+
 #Main Function
 def main():
     choiceNo=int(input("Enter the choice number:  \n 1. Check the Anagram: \n 2. Prime number in range: \n 3. Binary search of integer: \n" 
                        " 4. Binary search of string: \n 5. Insertion sort for integer: \n 6. Insertion sort for string: \n "
                        "7. Bubble sort for integer: \n 8. Bubble sort for string: \n 9. Merge sort for string: \n" 
                        "10. Day of Week: \n11. Temperature conversion: \n12. Vending machine: \n13. Decimal to Binary conversion: \n"
-                       "14. Swap Nibbles: \n15. Monthly payment: \n"))
+                       "14. Swap Nibbles: \n15. Monthly payment: \n16. Square root for non negative number: \n" ))
 
     #anagram function calling
     if choiceNo==1:
@@ -281,12 +291,18 @@ def main():
     elif choiceNo==14:
         num = int(input("Enter a number :"))
         print(util.swapNibbles(num))
+
     #Monthly payment
     elif choiceNo==15:
         principal_amount = int(input("Enter the principal amount :"))
         year = int(input("Enter how many year you take to repay :"))
         rate = int(input("Enter the rate of interest :"))
         util.monthlyPayment(principal_amount, year, rate)
+
+    #Sqrt
+    elif choiceNo==16:
+        c=int(input("Enter number : "))
+        util.squareRoot(c)
 
     else:
         print("Invalid choice !! ")
