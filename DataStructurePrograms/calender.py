@@ -1,6 +1,6 @@
 #Calender
 
-
+#Function for get day number
 def getDayNumber(date, month, year):
     y0 = year - (14 - month) // 12
     x = y0 + (y0 // 4) - y0 // 100 + y0 // 400
@@ -8,6 +8,7 @@ def getDayNumber(date, month, year):
     d0 = (date + x + (31 * m0) // 12) % 7
     return d0
 
+#Function for checking leap year
 def leapYear(year):
     if year % 4 == 0 and year % 100 != 0:
         return True
@@ -16,6 +17,7 @@ def leapYear(year):
     else:
         return False
 
+#Function for months day
 def monthsData(month,year):
     nonLeap = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]
     leap = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]
@@ -30,21 +32,26 @@ def monthsData(month,year):
         return leap
     else:
         return nonLeap
-
+#months= name of month i
+#first leave empty means Jan=1 consider
 months = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September",
           "October", "November", "December"]
+#day i=no of days in month i
 days = [ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 month=2
 year=2020
+#check leap year
 if month == 2 and leapYear(year):
     print("      ",months[month],year)
-
+#print calewnder header
 print("Sun","Mon","Tue","Wed","Thu","Fri","Sat")
-
+#starting day
 d=getDayNumber(month,1,year)
+#print the calender
 for i in range(d):
     print("  ")
     for i in range(days[month]):
         print(i+1, end= " ")
         if (i + d-1) % 7 == 0:
             print()
+
