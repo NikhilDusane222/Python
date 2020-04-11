@@ -1,3 +1,5 @@
+#Palindrome checker
+#class Dequeue
 class Deque:
     def __init__(self):
         self.items = []
@@ -26,15 +28,17 @@ def pal_check(string):
     pal_dq = Deque()
     for character in string:
         pal_dq.add_front(character)
-    print(string, "is Palindrome ")
     match = True
     while (pal_dq.size() > 1 and match):
         front = pal_dq.remove_front()
         rear = pal_dq.remove_rear()
         if front != rear:
             match = False
-            print(string, "is not Palindrome ")
     return match
 
-string = input("Enter a string: ")
-print(pal_check(string))
+string=input("Enter string to check palindrome: ")
+if (pal_check(string)):
+    print(string, "is Palindrome ")
+else:
+    print(string, "is not Palindrome ")
+
